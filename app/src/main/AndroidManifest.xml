@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ScreenActivity"
+        <activity android:name=".activity.ScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AlertDialog.AppCompat.Light">
             <intent-filter>
@@ -23,10 +23,10 @@
             <!--android:name=".Activity.KeyboardActivity"-->
             <!--android:screenOrientation="portrait" />-->
         <activity
-            android:name=".Activity.ToastActivity"
+            android:name=".activity.ToastActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.PermissionActivity"
+            android:name=".activity.PermissionActivity"
             android:screenOrientation="portrait" />
         <!--<activity android:name=".Activity.ScreenActivity"-->
             <!--android:screenOrientation="portrait"/>-->

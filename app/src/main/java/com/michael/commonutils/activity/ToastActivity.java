@@ -1,11 +1,10 @@
-package com.michael.commonutils.Activity;
+package com.michael.commonutils.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 

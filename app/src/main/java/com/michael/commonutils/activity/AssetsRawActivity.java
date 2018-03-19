@@ -1,4 +1,4 @@
-package com.michael.commonutils.Activity;
+package com.michael.commonutils.activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

@@ -8,9 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.michael.commonutils.Activity.KeyboardActivity;
-import com.michael.commonutils.Activity.PermissionActivity;
-import com.michael.commonutils.Activity.ToastActivity;
+import com.michael.commonutils.activity.KeyboardActivity;
+import com.michael.commonutils.activity.PermissionActivity;
+import com.michael.commonutils.activity.ToastActivity;
 
 public class MainActivity extends AppCompatActivity {
 

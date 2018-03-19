@@ -1,4 +1,4 @@
-package com.michael.commonutils.Activity;
+package com.michael.commonutils.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
