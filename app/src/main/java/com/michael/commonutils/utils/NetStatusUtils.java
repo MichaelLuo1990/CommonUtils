@@ -43,11 +43,11 @@ public class NetStatusUtils {
     }
 
     /**
-     * 判断网络是否可用
+     * 判断wifi网络是否可用
      * @param context
      * @return 是否为wifi网络
      */
-    public final boolean isWifiConnection(Context context) {
+    public static boolean isWifiConnection(Context context) {
         final ConnectivityManager connectivityManager = (ConnectivityManager) context.
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -60,7 +60,7 @@ public class NetStatusUtils {
      * @param context
      * @return 是否为移动网络
      */
-    public final boolean isGPRSConnection(Context context) {
+    public static boolean isGPRSConnection(Context context) {
         //获取活动连接管理器
         final ConnectivityManager connectivityManager = (ConnectivityManager) context.
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -69,11 +69,11 @@ public class NetStatusUtils {
     }
 
     /**
-     * 判断网络是否可用
+     * 判断网络连接类型
      * @param context
      * @return 并返回网络类型(WiFi || 移动网络)，ConnectivityManager.TYPE_WIFI，ConnectivityManager.TYPE_MOBILE，不可用返回-1
      */
-    public static final int getNetworkType(Context context) {
+    public static int getNetworkType(Context context) {
         final ConnectivityManager connectivityManager = (ConnectivityManager) context.
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo wifiNetworkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);

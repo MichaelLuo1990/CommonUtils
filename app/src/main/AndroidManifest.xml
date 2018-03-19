@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.michael.commonutils">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ScreenActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AlertDialog.AppCompat.Light">
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,21 +23,25 @@
             </intent-filter>
         </activity>
         <!--<activity android:name=".MainActivity" />-->
-        <!--<activity-->
-            <!--android:name=".Activity.KeyboardActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".activity.KeyboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ToastActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PermissionActivity"
             android:screenOrientation="portrait" />
-        <!--<activity android:name=".Activity.ScreenActivity"-->
-            <!--android:screenOrientation="portrait"/>-->
+        <activity
+            android:name=".activity.ScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NetStatusActivity"
+            android:screenOrientation="portrait" />
         <!--<activity android:name=".Activity.StorageActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+        <!--android:screenOrientation="portrait" />-->
         <!--<activity android:name=".Activity.AssetsRawActivity"-->
-            <!--android:screenOrientation="portrait" />-->
+        <!--android:screenOrientation="portrait" />-->
     </application>
 
 </manifest>
