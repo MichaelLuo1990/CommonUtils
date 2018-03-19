@@ -1,10 +1,12 @@
 package com.michael.commonutils.activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.michael.commonutils.R;
@@ -17,10 +19,14 @@ import com.michael.commonutils.utils.ScreenUtils;
 
 public class ScreenActivity extends Activity {
 
+    private ScrollView scrollView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen);
+        scrollView = (ScrollView) findViewById(R.id.sv_screen);
+        scrollView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -89,8 +95,46 @@ public class ScreenActivity extends Activity {
                 "10sp--->" + sp2px + "px" + "  /  " + "10px--->" + px2sp + "sp"  + "  /  " );
     }
 
-
+    /**
+     * 获取当前屏幕截图，包含状态栏
+     * @param view
+     */
     public void showScreenShotStatusbarClick(View view) {
-        ImageView imageView = (ImageView) findViewById(R.id.iv_screen_shot_with_statusbar);
+        final ImageView imageView = (ImageView) findViewById(R.id.iv_screen_shot_with_statusbar);
+        Bitmap bitmap = ScreenUtils.screenShotWithStatusBar(this);
+        imageView.setImageBitmap(bitmap);
+        if (imageView.getVisibility() == View.GONE) {
+            scrollView.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
+        }
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
+            }
+        });
     }
+
+    /**
+     * 获取当前屏幕截图，不包含状态栏
+     * @param view
+     */
+    public void showScreenShotWithoutStatusBarClick(View view) {
+        final ImageView imageView = (ImageView) findViewById(R.id.iv_screen_shot_without_statusbar);
+        Bitmap bitmap = ScreenUtils.screenShotWithoutStatusBar(this);
+        imageView.setImageBitmap(bitmap);
+        if (imageView.getVisibility() == View.GONE) {
+            scrollView.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
+        }
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
+            }
+        });
+    }
+
 }

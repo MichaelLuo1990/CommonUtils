@@ -207,6 +207,7 @@ public class ScreenUtils {
 
     /**
      * 获取当前屏幕截图，包含状态栏
+     * webview可能截取无效
      *
      * @param activity
      * @return
@@ -227,6 +228,7 @@ public class ScreenUtils {
 
     /**
      * 获取当前屏幕截图，不包含状态栏
+     * webview可能截取无效
      *
      * @param activity
      * @return
