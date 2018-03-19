@@ -5,6 +5,7 @@ mainClassName = 'java.MainRun'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':app')
+    compile 'junit:junit:4.12'
 }
 
 //新版本
