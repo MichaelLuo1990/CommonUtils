@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:text="屏幕相关操作参数ref"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showScreenShotStatusbarClick"
+                android:text="获取屏幕dip值" />
+
+            <ImageView
+                android:id="@+id/iv_screen_shot_with_statusbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getDpiClick"
+                android:text="获取屏幕dip值" />
+
+            <TextView
+                android:id="@+id/tv_screen_dpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="hasPortraitClick"
+                android:text="是否为竖屏状态" />
+
+            <TextView
+                android:id="@+id/tv_screen_oriatation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="hasNavigationBarClick"
+                android:text="是否存在底部导航栏NavigationBar" />
+
+            <TextView
+                android:id="@+id/tv_screen_navigation_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getStatusTitleBarNavigationBarClick"
+                android:text="获取状态栏、标题栏、导航栏参数" />
+
+            <TextView
+                android:id="@+id/tv_screen_status_titlebar_navbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="transferDpPxSpClick"
+                android:text="dp、px、sp单位装换" />
+
+            <TextView
+                android:id="@+id/tv_screen_dp_px_sp_transform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

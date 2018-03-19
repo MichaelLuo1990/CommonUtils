@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_top_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="summary"
+        android:textSize="20sp"
+        android:textColor="#333333"/>
+
+    <TextView
+        android:id="@+id/tv_top_summary"
+        android:layout_below="@+id/tv_top_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="1、 assets目录不会被映射到R中，因此，资源无法通过R.id方式获取，
+        必须要通过AssetManager进行操作与获取,数据库文件和游戏数据等放在这个目录下是比较合适；
+        res/raw目录下的资源会被映射到R中，可以通过getResource()方法获取资源,MP3和Ogg文件放在这个目录下是比较合适。
+2、 多级目录：assets下可以有多级目录，res/raw下不可以有多级目录。
+3、 assets目录与res/raw目录都不会被二进制编码" />
+
+    <ScrollView
+        android:layout_below="@+id/tv_top_summary"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+            <!--assets相关操作  start-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="main/assets资源操作"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getAssetsTextClick"
+                android:text="获取assets文本内容" />
+
+            <TextView
+                android:id="@+id/tv_show_assets_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getAssetsImageClick"
+                android:text="获取assets图片" />
+
+            <ImageView
+                android:id="@+id/iv_get_assets_photo"
+                android:layout_width="180dp"
+                android:layout_height="180dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getAssetsHtmlClick"
+                android:text="加载assets中HTML页面" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="从assets中加载音频/视频相关文件（待添加测试）"/>
+            <!--assets相关操作  end-->
+            <!--raw相关操作 start-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#666666" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="res/raw资源操作"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getRawTextClick"
+                android:text="获取raw文本内容" />
+
+            <TextView
+                android:id="@+id/tv_show_raw_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getRawImageClick"
+                android:text="获取raw图片" />
+
+            <ImageView
+                android:id="@+id/iv_get_raw_photo"
+                android:layout_width="180dp"
+                android:layout_height="180dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="从raw中加载音频/视频相关文件（待添加测试）"/>
+            <!--raw相关操作 end-->
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--assets加载HTML测试布局-->
+    <LinearLayout
+        android:id="@+id/ll_assets_html_res"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:onClick="backClick"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="返回"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="加载assets下HTML"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#666666" />
+
+        <WebView
+            android:id="@+id/wv_show_assets_html"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </WebView>
+    </LinearLayout>
+
+
+</RelativeLayout>

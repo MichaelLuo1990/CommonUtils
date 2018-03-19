@@ -1,0 +1,24 @@
+{
+  "code": 200,
+  "msg": "服务端处理返回，操作成功",
+  "data": {
+    "student": {
+      "id": "11",
+      "name": "Michael",
+      "sex": "男",
+      "grade": 90,
+      "className": "三年二班",
+      "age": 17
+    },
+    "subjects": [{
+      "courseTitle": "线性代数",
+      "credit": 4
+    }, {
+      "courseTitle": "计算机网络",
+      "credit": 5
+    }, {
+      "courseTitle": "英语",
+      "credit": 3
+    }]
+  }
+}
