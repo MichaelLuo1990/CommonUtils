@@ -1,9 +1,10 @@
-package com.utils;
+package com.michael.commonutils.utils;
 
 import java.util.regex.Pattern;
 
 /**
  * Desc 正则表达式判断/处理
+ * javalib中代码测试
  * Created by Michael on 2018/3/19.
  */
 

@@ -49,7 +49,7 @@ public class StringUtils {
      * @return
      */
     public static boolean isAlphabet(String str) {
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        Pattern pattern = Pattern.compile("^[A-Za-z]+$");
         return pattern.matcher(str).matches();
     }
 
@@ -60,7 +60,7 @@ public class StringUtils {
      * @return
      */
     public static boolean isChineseCharacters(String str) {
-        Pattern pattern = Pattern.compile("[\u4e00-\u9fa5]");
+        Pattern pattern = Pattern.compile("^[\u4E00-\u9FA5]+$");
         return pattern.matcher(str).matches();
 
     }
@@ -131,7 +131,7 @@ public class StringUtils {
      * @return
      */
     public static String decimalToPercentage(double decimal) {
-        DecimalFormat df = new DecimalFormat("0.00%");
+        DecimalFormat df = new DecimalFormat("0%");
         return df.format(decimal);
     }
 
@@ -152,13 +152,13 @@ public class StringUtils {
     }
 
     /**
-     * 将double型的金钱数转换成两位小数的String型
+     * 将double型金钱数字保留2位小数且已三位三位的"，"隔开
      *
      * @param money
      * @return
      */
     public static String moneyFormatDecimal(double money) {
-        DecimalFormat df = new DecimalFormat("######0.00");
+        NumberFormat df = new DecimalFormat("#,###.##");
         return df.format(money);
     }
 
