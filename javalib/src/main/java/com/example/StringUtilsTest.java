@@ -1,6 +1,5 @@
 package com.example;
 
-import com.utils.RegexUtils;
 import com.utils.StringUtils;
 
 import java.text.ParseException;
@@ -24,7 +23,8 @@ public class StringUtilsTest {
         System.out.println("字符串设置模糊手机号码：" + StringUtils.setBlurryPhone("13500980987"));
         System.out.println("小数转换成百分数：" + StringUtils.decimalToPercentage(0.888));
         System.out.println("格式化钱(保留两位小数)：" + StringUtils.moneyFormatDecimal(1000.808));
-        System.out.println("格式化钱(三个数字加上逗号处理)：" + StringUtils.moneyFormatDecimal(34734563.457));
+        System.out.println("格式化钱(三个数字加上逗号处理，保留两位小数)：" + StringUtils.moneyFormatDecimal(34734563.457));
+        System.out.println("格式化钱(三个数字加上逗号处理)：" + StringUtils.moneyFormatSplit("34734563.457456"));
         try {
             String idCardValidate = StringUtils.IDCardValidate("350746196709132567");
             if(idCardValidate.equals("")) {

@@ -168,22 +168,33 @@ public class StringUtils {
      * @param str 无逗号的数字
      * @return 加上逗号的数字
      */
-    public static String moneyCommaSplit(String str) {
+    public static String moneyFormatSplit(String str) {
         String beforeStr = "";
-        String afterStr = "";
+        String reverseSplitStr = "";
         if (isEmpty(str)) {
             return "0";
         }
         if (str.indexOf(".") != -1) {// 判断传过来的字符串是否含有小数点‘.’,即数字是否为小数
             // 截取小数点以及之后的字符串
-            afterStr = str.substring(str.indexOf("."), str.length());
+            String afterStr = str.substring(str.indexOf(".") + 1, str.length());
+            reverseSplitStr = reverseSplitStr(afterStr);
             // 截取小数点之前的字符串
             beforeStr = str.substring(0, str.indexOf("."));
         } else {
             beforeStr = str;
         }
+        String splitStr = reverseSplitStr(beforeStr);
+        return splitStr + "." + reverseSplitStr;
+    }
+
+    /**
+     * 转换分割字符串
+     * @param reverseSplitStr
+     * @return
+     */
+    private static String reverseSplitStr(String reverseSplitStr) {
         // 将传进数字反转
-        String reverseStr = new StringBuilder(beforeStr).reverse().toString();
+        String reverseStr = new StringBuilder(reverseSplitStr).reverse().toString();
         String strTemp = "";
         for (int i = 0; i < reverseStr.length(); i++) {
             if (i * 3 + 3 > reverseStr.length()) {
@@ -198,7 +209,7 @@ public class StringUtils {
         }
         // 将数字重新反转
         String resultStr = new StringBuilder(strTemp).reverse().toString();
-        return resultStr + afterStr;
+        return resultStr;
     }
 
     /**

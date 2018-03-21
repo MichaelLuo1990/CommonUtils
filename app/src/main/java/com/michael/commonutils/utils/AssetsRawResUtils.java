@@ -43,7 +43,7 @@ public class AssetsRawResUtils {
      * @return
      */
     public static String getTextFromAssets(Context context, String fileName) {
-        if (context == null || StringUtils.isEmpty(fileName)) {
+        if (context == null || TextUtils.isEmpty(fileName)) {
             return null;
         }
 
