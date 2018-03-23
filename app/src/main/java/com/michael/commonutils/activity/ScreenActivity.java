@@ -82,6 +82,15 @@ public class ScreenActivity extends Activity {
     }
 
     /**
+     * 获取屏幕宽高属性
+     * @param view
+     */
+    public void getScreenWHClick(View view) {
+        TextView textView = (TextView) findViewById(R.id.tv_screen_weith_height);
+        textView.setText("当前屏幕密度：" + ScreenUtils.getDeviceDensity(this) + "  /  屏幕宽：" + ScreenUtils.getScreenWidth(this) + "  /  屏幕高：" + ScreenUtils.getScreenHeight(this));
+    }
+
+    /**
      * dp  px  sp 单位装换
      * @param view
      */

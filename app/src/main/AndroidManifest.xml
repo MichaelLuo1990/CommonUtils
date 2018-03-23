@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.DeviceInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
@@ -38,6 +39,9 @@
         <activity
             android:name=".activity.NetStatusActivity"
             android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".activity.DeviceInfoActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <!--<activity android:name=".Activity.StorageActivity"-->
         <!--android:screenOrientation="portrait" />-->
         <!--<activity android:name=".Activity.AssetsRawActivity"-->

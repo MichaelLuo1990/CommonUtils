@@ -117,6 +117,38 @@ public class StorageUtils {
         return blockSize * availableBlocks / 1024 / 1024;
     }
 
+//    /*显示ROM的可用和总容量，ROM相当于电脑的C盘*/
+//    private void showROMInfo(){
+//        File file=Environment.getDataDirectory();
+//        StatFs statFs=new StatFs(file.getPath());
+//        long blockSize=statFs.getBlockSize();
+//        long totalBlocks=statFs.getBlockCount();
+//        long availableBlocks=statFs.getAvailableBlocks();
+//
+//        String[] total=fileSize(totalBlocks*blockSize);
+//        String[] available=fileSize(availableBlocks*blockSize);
+//
+//        rOMTextView.setText("ROM "+available[0]+available[1]+"/"+total[0]+total[1]);
+//    }
+//    /*显示SD卡的可用和总容量，SD卡就相当于电脑C盘以外的硬盘*/
+//    private void showSDInfo(){
+//        if(Environment.getExternalStorageState().equals
+//                (Environment.MEDIA_MOUNTED)){
+//            File file=Environment.getExternalStorageDirectory();
+//            StatFs statFs=new StatFs(file.getPath());
+//            long blockSize=statFs.getBlockSize();
+//            long totalBlocks=statFs.getBlockCount();
+//            long availableBlocks=statFs.getAvailableBlocks();
+//
+//            String[] total=fileSize(totalBlocks*blockSize);
+//            String[] available=fileSize(availableBlocks*blockSize);
+//
+//            sDTextView.setText("SD "+available[0]+available[1]+"/"+total[0]+total[1]);
+//        }else {
+//            sDTextView.setText("SD CARD 已删除");
+//        }
+//    }
+
     /**
      * 获取指定路径所在空间的剩余可用容量字节数，单位byte
      *

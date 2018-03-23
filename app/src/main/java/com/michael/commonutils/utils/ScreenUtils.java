@@ -62,6 +62,15 @@ public class ScreenUtils {
     }
 
     /**
+     * 获取设备屏幕密度,像素的比例
+     * @param context
+     * @return
+     */
+    public static float getDeviceDensity(Context context){
+        return context.getResources().getDisplayMetrics().density;
+    }
+
+    /**
      * 获取是否存在底部导航栏NavigationBar
      *
      * @param context

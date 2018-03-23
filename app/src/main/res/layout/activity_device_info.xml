@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="屏幕相关操作参数ref"
+        android:text="硬件设备信息相关操作"
         android:textSize="20sp" />
 
     <ScrollView
@@ -26,11 +26,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="getDpiClick"
-                android:text="获取屏幕dip值" />
+                android:onClick="getIPAddressClick"
+                android:text="获取当前网络IP地址" />
 
             <TextView
-                android:id="@+id/tv_screen_dpi"
+                android:id="@+id/tv_ip_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />
@@ -38,11 +38,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="hasPortraitClick"
-                android:text="是否为竖屏状态" />
+                android:onClick="isRootedClick"
+                android:text="设备是否获取root权限" />
 
             <TextView
-                android:id="@+id/tv_screen_oriatation"
+                android:id="@+id/tv_root_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />
@@ -50,11 +50,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="hasNavigationBarClick"
-                android:text="是否存在底部导航栏NavigationBar" />
+                android:onClick="getSysSdkCodeNameClick"
+                android:text="获取当前设备系统SDK版本名称与版本号" />
 
             <TextView
-                android:id="@+id/tv_screen_navigation_bar"
+                android:id="@+id/tv_sys_code_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />
@@ -62,11 +62,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="getStatusTitleBarNavigationBarClick"
-                android:text="获取状态栏、标题栏、导航栏参数" />
+                android:onClick="getImeiManuTypeSysInfoClick"
+                android:text="获取手机IMEI号、手机厂商、手机型号、手机系统版本号" />
 
             <TextView
-                android:id="@+id/tv_screen_status_titlebar_navbar"
+                android:id="@+id/tv_imei_manu_type_sys_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />
@@ -74,11 +74,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="getScreenWHClick"
-                android:text="获取屏幕宽高相关属性" />
+                android:onClick="isTargetDeviceClick"
+                android:text="是否为指定设备机型判断" />
 
             <TextView
-                android:id="@+id/tv_screen_weith_height"
+                android:id="@+id/tv_is_target_device"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />
@@ -86,11 +86,11 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="transferDpPxSpClick"
-                android:text="dp、px、sp单位装换" />
+                android:onClick="getDeviceInfoClick"
+                android:text="获取设备信息" />
 
             <TextView
-                android:id="@+id/tv_screen_dp_px_sp_transform"
+                android:id="@+id/tv_device_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" />
@@ -98,29 +98,29 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="showScreenShotStatusbarClick"
-                android:text="获取当前屏幕截图，包含状态栏" />
+                android:onClick="getCPUInfoClick"
+                android:text="获取CPU信息(/proc/cpuinfo)" />
+
+            <TextView
+                android:id="@+id/tv_cpu_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="showScreenShotWithoutStatusBarClick"
-                android:text="获取当前屏幕截图，不包含状态栏" />
+                android:onClick="getMemoryInfoClick"
+                android:text="获取内存信息" />
+
+            <TextView
+                android:id="@+id/tv_memory_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
 
         </LinearLayout>
 
     </ScrollView>
-
-    <ImageView
-        android:id="@+id/iv_screen_shot_with_statusbar"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:id="@+id/iv_screen_shot_without_statusbar"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
