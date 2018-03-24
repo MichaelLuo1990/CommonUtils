@@ -11,58 +11,7 @@ import java.util.Date;
  */
 
 public class DateTimeUtils {
-
-    //枚举日期格式
-    public enum DatePattern {
-        ALL_TIME {
-            public String getValue() {
-                return "yyyy-MM-dd HH:mm:ss";
-            }
-        },
-        ONLY_MONTH {
-            public String getValue() {
-                return "yyyy-MM";
-            }
-        },
-        ONLY_DAY {
-            public String getValue() {
-                return "yyyy-MM-dd";
-            }
-        },
-        ONLY_HOUR {
-            public String getValue() {
-                return "yyyy-MM-dd HH";
-            }
-        },
-        ONLY_MINUTE {
-            public String getValue() {
-                return "yyyy-MM-dd HH:mm";
-            }
-        },
-        ONLY_MONTH_DAY {
-            public String getValue() {
-                return "MM-dd";
-            }
-        },
-        ONLY_MONTH_SEC {
-            public String getValue() {
-                return "MM-dd HH:mm";
-            }
-        },
-        ONLY_TIME {
-            public String getValue() {
-                return "HH:mm:ss";
-            }
-        },
-        ONLY_HOUR_MINUTE {
-            public String getValue() {
-                return "HH:mm";
-            }
-        };
-
-        public abstract String getValue();
-    }
-
+    private static final String FORMAT_DEFAULT = "yyyy-MM-dd HH:mm:ss";//默认显示格式（常用）
     public static String FORMAT_Y = "yyyy";//英文简写如：2010
     public static String FORMAT_YM = "yyyy-MM";//英文简写如：2010-12
     public static String FORMAT_YMD = "yyyy-MM-dd";//英文简写（默认）如：2010-12-01
@@ -73,16 +22,17 @@ public class DateTimeUtils {
     public static String FORMAT_YMDH = "yyyy-MM-dd HH";//英文全称  如：2010-12-01 23
     public static String FORMAT_YMDHM = "yyyy-MM-dd HH:mm";//英文全称  如：2010-12-01 23:15
     public static String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";//英文全称  如：2010-12-01 23:15:06
-    public static String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.S";//精确到毫秒的完整时间    如：yyyy-MM-dd HH:mm:ss.S
-
-    public static String FORMAT_FULL_SN = "yyyyMMddHHmmssS";//精确到毫秒的完整时间    如：yyyy-MM-dd HH:mm:ss.S
+    public static String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.S";//英文全称   精确到毫秒的完整时间    如：yyyy-MM-dd HH:mm:ss.S
+    //带中文显示
+    public static String FORMAT_MD_CN = "MM月dd日";//中文简写  如：12月01日
     public static String FORMAT_YMD_CN = "yyyy年MM月dd日";//中文简写  如：2010年12月01日
     public static String FORMAT_YMDH_CN = "yyyy年MM月dd日 HH时";//中文简写  如：2010年12月01日  12时
     public static String FORMAT_YMDHM_CN = "yyyy年MM月dd日 HH时mm分";//中文简写  如：2010年12月01日  12时12分
-    public static String FORMAT_YMDHMS_CN = "yyyy年MM月dd日  HH时mm分ss秒";//中文全称  如：2010年12月01日  23时15分06秒
-    public static String FORMAT_FULL_CN = "yyyy年MM月dd日  HH时mm分ss秒SSS毫秒";//精确到毫秒的完整中文时间
-    public static Calendar calendar = null;
-    private static final String FORMAT_DEFAULT = "yyyy-MM-dd HH:mm:ss";
+    public static String FORMAT_HM_CN = "HH时mm分";//中文简写  如：12时12分
+    public static String FORMAT_YMDHMS_CN = "yyyy年MM月dd日 HH时mm分ss秒";//中文全称  如：2010年12月01日  23时15分06秒
+    public static String FORMAT_HMS_CN = "HH时mm分ss秒";//中文全称  如：23时15分06秒
+    public static String FORMAT_FULL_CN = "yyyy年MM月dd日 HH时mm分ss秒S毫秒";//中文显示  精确到毫秒的完整时间    如：2018年03月24日 14时46分39秒443毫秒
+//    public static Calendar calendar = null;
 
     //===============================================================transform======================================================================
 
@@ -93,7 +43,7 @@ public class DateTimeUtils {
      * @param format
      * @return 指定格式类型Date
      */
-    private static Date str2Date(String str, String format) {
+    public static Date str2Date(String str, String format) {
         if (str == null || str.length() == 0) {
             return null;
         }
@@ -154,7 +104,7 @@ public class DateTimeUtils {
      * @param format
      * @return 指定格式字符串
      */
-    private static String date2Str(Date d, String format) {// yyyy-MM-dd HH:mm:ss
+    public static String date2Str(Date d, String format) {// yyyy-MM-dd HH:mm:ss
         if (d == null) {
             return null;
         }
@@ -225,6 +175,7 @@ public class DateTimeUtils {
 
     /**
      * 毫秒转化字符串
+     *
      * @param time
      * @param format
      * @return 指定格式字符串
@@ -235,6 +186,7 @@ public class DateTimeUtils {
 
     /**
      * 毫秒转化字符串
+     *
      * @param time
      * @return 默认格式字符串
      */
@@ -263,7 +215,7 @@ public class DateTimeUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         return c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" +
-                c.get(Calendar.DAY_OF_MONTH) + "-" +
+                c.get(Calendar.DAY_OF_MONTH) + " " +
                 c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) +
                 ":" + c.get(Calendar.SECOND);
     }
@@ -277,37 +229,7 @@ public class DateTimeUtils {
     public static String getCurDateStr(String format) {
         Calendar c = Calendar.getInstance();
         return calendar2Str(c, format);
-
     }
-
-//    /**
-//     * @param time 当前的时间（毫秒）数
-//     * @return 默认格式类型
-//     */
-//    public static String getMillon(long time) {
-//        return new SimpleDateFormat(FORMAT_DEFAULT).format(time);//src  "yyyy-MM-dd-HH-mm-ss"
-//
-//    }
-//
-//
-//    /**
-//     * @param time 当前的时间
-//     * @return 当前的天
-//     */
-//    public static String getDay(long time) {
-//        return new SimpleDateFormat("yyyy-MM-dd").format(time);
-//
-//    }
-//
-//
-//    /**
-//     * @param time 时间
-//     * @return 返回一个毫秒
-//     */
-//    // 格式到毫秒
-//    public static String getSMillon(long time) {
-//        return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS").format(time);
-//    }
 
 
     /**
@@ -378,7 +300,7 @@ public class DateTimeUtils {
      * @return 返回月份
      */
     public static int getMonth(Date date) {
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.MONTH) + 1;
     }
@@ -391,7 +313,7 @@ public class DateTimeUtils {
      * @return 返回日份
      */
     public static int getDay(Date date) {
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
@@ -404,7 +326,7 @@ public class DateTimeUtils {
      * @return 返回小时
      */
     public static int getHour(Date date) {
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.HOUR_OF_DAY);
     }
@@ -417,7 +339,7 @@ public class DateTimeUtils {
      * @return 返回分钟
      */
     public static int getMinute(Date date) {
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.MINUTE);
     }
@@ -440,8 +362,7 @@ public class DateTimeUtils {
      * @return 返回秒钟
      */
     public static int getSecond(Date date) {
-        calendar = Calendar.getInstance();
-
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.SECOND);
     }
@@ -466,7 +387,7 @@ public class DateTimeUtils {
      * @return 返回毫
      */
     public static long getMillis(Date date) {
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.getTimeInMillis();
     }
