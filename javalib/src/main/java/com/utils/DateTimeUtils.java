@@ -11,7 +11,7 @@ import java.util.Date;
  */
 
 public class DateTimeUtils {
-    private static final String FORMAT_DEFAULT = "yyyy-MM-dd HH:mm:ss";//默认显示格式（常用）
+    public static final String FORMAT_DEFAULT = "yyyy-MM-dd HH:mm:ss";//默认显示格式（常用）
     public static String FORMAT_Y = "yyyy";//英文简写如：2010
     public static String FORMAT_YM = "yyyy-MM";//英文简写如：2010-12
     public static String FORMAT_YMD = "yyyy-MM-dd";//英文简写（默认）如：2010-12-01
@@ -21,8 +21,8 @@ public class DateTimeUtils {
     public static String FORMAT_HMS = "HH:mm:ss";//英文简写如：12:01:06
     public static String FORMAT_YMDH = "yyyy-MM-dd HH";//英文全称  如：2010-12-01 23
     public static String FORMAT_YMDHM = "yyyy-MM-dd HH:mm";//英文全称  如：2010-12-01 23:15
-    public static String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";//英文全称  如：2010-12-01 23:15:06
-    public static String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.S";//英文全称   精确到毫秒的完整时间    如：yyyy-MM-dd HH:mm:ss.S
+    //    public static String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";//英文全称  如：2010-12-01 23:15:06
+//    public static String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.S";//英文全称   精确到毫秒的完整时间    如：yyyy-MM-dd HH:mm:ss.S
     //带中文显示
     public static String FORMAT_MD_CN = "MM月dd日";//中文简写  如：12月01日
     public static String FORMAT_YMD_CN = "yyyy年MM月dd日";//中文简写  如：2010年12月01日
@@ -32,23 +32,42 @@ public class DateTimeUtils {
     public static String FORMAT_YMDHMS_CN = "yyyy年MM月dd日 HH时mm分ss秒";//中文全称  如：2010年12月01日  23时15分06秒
     public static String FORMAT_HMS_CN = "HH时mm分ss秒";//中文全称  如：23时15分06秒
     public static String FORMAT_FULL_CN = "yyyy年MM月dd日 HH时mm分ss秒S毫秒";//中文显示  精确到毫秒的完整时间    如：2018年03月24日 14时46分39秒443毫秒
-//    public static Calendar calendar = null;
+
+    /**
+     * 验证日期格式是否合法
+     *
+     * @param curStr     待验证日期字符串
+     * @param patternStr 验证模板
+     * @return 是否合法     如果throw java.text.ParseException或者NullPointerException，就说明格式不对
+     */
+    public static boolean isValidDate(String curStr, String patternStr) {
+        boolean convertSuccess = true;
+        SimpleDateFormat format = new SimpleDateFormat(patternStr);
+        try {
+            // 设置lenient为false. 否则SimpleDateFormat会比较宽松地验证日期，比如2007/02/29会被接受，并转换成2007/03/01
+            format.setLenient(false);
+            format.parse(curStr);
+        } catch (ParseException e) {
+            convertSuccess = false;
+        }
+        return convertSuccess;
+    }
 
     //===============================================================transform======================================================================
 
     /**
-     * 字符串转Date
+     * 日期格式字符串转Date
      *
      * @param str
      * @param format
      * @return 指定格式类型Date
      */
-    public static Date str2Date(String str, String format) {
+    public static Date dateStr2Date(String str, String format) {
         if (str == null || str.length() == 0) {
             return null;
         }
         if (format == null || format.length() == 0) {
-            format = FORMAT_DEFAULT;
+            return null;
         }
         Date date = null;
         try {
@@ -61,24 +80,14 @@ public class DateTimeUtils {
     }
 
     /**
-     * 字符串转Date
-     *
-     * @param str
-     * @return 默认格式类型Date
-     */
-    public static Date str2Date(String str) {
-        return str2Date(str, null);
-    }
-
-    /**
-     * 字符串转Calendar
+     * 日期格式字符串转Calendar
      *
      * @param str
      * @param format
      * @return 指定格式Calendar
      */
-    public static Calendar str2Calendar(String str, String format) {
-        Date date = str2Date(str, format);
+    public static Calendar dateStr2Calendar(String str, String format) {
+        Date date = dateStr2Date(str, format);
         if (date == null) {
             return null;
         }
@@ -88,28 +97,18 @@ public class DateTimeUtils {
     }
 
     /**
-     * 字符串转Calendar
-     *
-     * @param str
-     * @return 默认格式类型Calendar
-     */
-    public static Calendar str2Calendar(String str) {
-        return str2Calendar(str, null);
-    }
-
-    /**
-     * Date转字符串
+     * Date转日期格式字符串
      *
      * @param d
      * @param format
      * @return 指定格式字符串
      */
-    public static String date2Str(Date d, String format) {// yyyy-MM-dd HH:mm:ss
+    public static String date2DateStr(Date d, String format) {// yyyy-MM-dd HH:mm:ss
         if (d == null) {
             return null;
         }
         if (format == null || format.length() == 0) {
-            format = FORMAT_DEFAULT;
+            return null;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         String s = sdf.format(d);
@@ -117,37 +116,17 @@ public class DateTimeUtils {
     }
 
     /**
-     * Date转字符串
-     *
-     * @param d
-     * @return 默认格式字符串
-     */
-    public static String date2Str(Date d) {// yyyy-MM-dd HH:mm:ss
-        return date2Str(d, null);
-    }
-
-    /**
-     * Calendar转字符串
+     * Calendar转日期格式字符串
      *
      * @param c
      * @param format
      * @return 指定格式字符串
      */
-    public static String calendar2Str(Calendar c, String format) {
+    public static String calendar2DateStr(Calendar c, String format) {
         if (c == null) {
             return null;
         }
-        return date2Str(c.getTime(), format);
-    }
-
-    /**
-     * Calendar转字符串
-     *
-     * @param c
-     * @return 默认格式字符串
-     */
-    public static String calendar2Str(Calendar c) {// yyyy-MM-dd HH:mm:ss
-        return calendar2Str(c, null);
+        return date2DateStr(c.getTime(), format);
     }
 
     /**
@@ -174,44 +153,76 @@ public class DateTimeUtils {
     }
 
     /**
-     * 毫秒转化字符串
+     * 时间戳字符串转换成日期格式字符串
      *
-     * @param time
+     * @param timestampStr 精确到秒的字符串
      * @param format
-     * @return 指定格式字符串
+     * @return
      */
-    public static String millisecond2Str(long time, String format) {
-        return new SimpleDateFormat(format).format(time);
+    public static String timestampStr2DateStr(String timestampStr, String format) {
+        if (timestampStr == null || timestampStr.isEmpty() || timestampStr.equals("null")) {
+            return "";
+        }
+        if (format == null || format.isEmpty()) {
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(new Date(Long.valueOf(timestampStr + "000")));
     }
 
     /**
-     * 毫秒转化字符串
+     * 日期格式字符串转换成时间戳字符串
      *
-     * @param time
-     * @return 默认格式字符串
+     * @param dateStr  字符串日期
+     * @param format   如：yyyy-MM-dd HH:mm:ss 或 yyyy-MM-dd HH:mm:ss.S
+     * @param isSecond 是否精确到秒(毫秒)
+     * @return
      */
-    public static String millisecond2Str(long time) {
-        return new SimpleDateFormat(FORMAT_DEFAULT).format(time);//src  "yyyy-MM-dd-HH-mm-ss"
+    public static String dateStr2TimestampStr(String dateStr, String format, boolean isSecond) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            if (isSecond) {
+                return String.valueOf(sdf.parse(dateStr).getTime() / 1000);
+            } else {
+                return String.valueOf(sdf.parse(dateStr).getTime());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
+
     //===============================================================transform======================================================================
 
     /**
+     * 获取当前时间戳(精确到毫秒)
      * 方法一 System.currentTimeMillis();  最快
      * 方法二 Calendar.getInstance().getTimeInMillis();  速度最慢，处理时区转化
      * 方法三 new Date().getTime();  次之
      *
      * @return
      */
-    public static long getCurTimeMillis() {
+    public static long getCurTimestamp() {
         return System.currentTimeMillis();
     }
 
     /**
-     * 获取当前时间字符串
+     * 取得当前时间戳字符串（精确到秒）
+     *
+     * @return
+     */
+    public static String getCurSecondStr() {
+        long time = System.currentTimeMillis();
+        String t = String.valueOf(time / 1000);
+        return t;
+    }
+
+    /**
+     * 获取当前日期/时间字符串
      *
      * @return 默认显示格式字符串  yyyy-MM-dd HH:mm:ss
      */
-    public static String getCurDateStr() {
+    public static String getCurDateTiemStr() {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         return c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" +
@@ -221,226 +232,89 @@ public class DateTimeUtils {
     }
 
     /**
-     * 获取当前日期的字符串
+     * 获取当前日期/日期的字符串
      *
      * @param format 格式化的类型
-     * @return 格式化的时间
+     * @return 自定义格式化的时间
      */
-    public static String getCurDateStr(String format) {
+    public static String getCurDateTimeStr(String format) {
         Calendar c = Calendar.getInstance();
-        return calendar2Str(c, format);
+        return calendar2DateStr(c, format);
     }
 
-
     /**
-     * 在日期上增加数个整月
+     * 计算距离当前的时间（前后）差值
      *
-     * @param date 日期
-     * @param n    要增加的月数
-     * @return 增加数个整月
+     * @param time
+     * @return
      */
-    public static Date addMonth(Date date, int n) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.MONTH, n);
-        return cal.getTime();
-
-    }
-
-
-    /**
-     * 在日期上增加天数
-     *
-     * @param date 日期
-     * @param n    要增加的天数
-     * @return 增加之后的天数
-     */
-    public static Date addDay(Date date, int n) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE, n);
-        return cal.getTime();
-
-    }
-
-
-    /**
-     * 获取距现在某一小时的时刻
-     *
-     * @param format 格式化时间的格式
-     * @param h      距现在的小时 例如：h=-1为上一个小时，h=1为下一个小时
-     * @return 获取距现在某一小时的时刻
-     */
-    public static String getNextHour(String format, int h) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        Date date = new Date();
-        date.setTime(date.getTime() + h * 60 * 60 * 1000);
-        return sdf.format(date);
-
-    }
-
-
-    /**
-     * 获取时间戳
-     *
-     * @return 获取时间戳
-     */
-    public static String getTimeString() {
-        SimpleDateFormat df = new SimpleDateFormat(FORMAT_FULL);
-        Calendar calendar = Calendar.getInstance();
-        return df.format(calendar.getTime());
-
-    }
-
-
-    /**
-     * 功能描述：返回月
-     *
-     * @param date Date 日期
-     * @return 返回月份
-     */
-    public static int getMonth(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.MONTH) + 1;
-    }
-
-
-    /**
-     * 功能描述：返回日
-     *
-     * @param date Date 日期
-     * @return 返回日份
-     */
-    public static int getDay(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.DAY_OF_MONTH);
-    }
-
-
-    /**
-     * 功能描述：返回小
-     *
-     * @param date 日期
-     * @return 返回小时
-     */
-    public static int getHour(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.HOUR_OF_DAY);
-    }
-
-
-    /**
-     * 功能描述：返回分
-     *
-     * @param date 日期
-     * @return 返回分钟
-     */
-    public static int getMinute(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.MINUTE);
-    }
-
-
-    /**
-     * 获得默认的 date pattern
-     *
-     * @return 默认的格式
-     */
-    public static String getDatePattern() {
-        return FORMAT_YMDHMS;
-    }
-
-
-    /**
-     * 返回秒钟
-     *
-     * @param date Date 日期
-     * @return 返回秒钟
-     */
-    public static int getSecond(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.get(Calendar.SECOND);
-    }
-
-
-    /**
-     * 使用预设格式提取字符串日期
-     *
-     * @param strDate 日期字符串
-     * @return 提取字符串的日期
-     */
-    public static Date parse(String strDate) {
-        return parse(strDate, getDatePattern());
-
-    }
-
-
-    /**
-     * 功能描述：返回毫
-     *
-     * @param date 日期
-     * @return 返回毫
-     */
-    public static long getMillis(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar.getTimeInMillis();
-    }
-
-
-    /**
-     * 按默认格式的字符串距离今天的天数
-     *
-     * @param date 日期字符串
-     * @return 按默认格式的字符串距离今天的天数
-     */
-    public static int countDays(String date) {
-        long t = Calendar.getInstance().getTime().getTime();
-        Calendar c = Calendar.getInstance();
-        c.setTime(parse(date));
-        long t1 = c.getTime().getTime();
-        return (int) (t / 1000 - t1 / 1000) / 3600 / 24;
-
-    }
-
-
-    /**
-     * 使用用户格式提取字符串日期
-     *
-     * @param strDate 日期字符串
-     * @param pattern 日期格式
-     * @return 提取字符串日期
-     */
-    public static Date parse(String strDate, String pattern) {
-        SimpleDateFormat df = new SimpleDateFormat(pattern);
+    public static String getBeforeCurTime(String time) {
+        long nowTime = System.currentTimeMillis();  //获取当前时间的毫秒数
+        String msg = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//指定时间格式
+        Date setTime = null;  //指定时间
         try {
-            return df.parse(strDate);
+            setTime = sdf.parse(time);  //将字符串转换为指定的时间格式
         } catch (ParseException e) {
             e.printStackTrace();
-            return null;
         }
-
+        long reset = setTime.getTime();   //获取指定时间的毫秒数
+        long dateDiff = nowTime - reset;
+        long abs = Math.abs(dateDiff);
+        long dateTemp1 = abs / 1000; //秒
+        long dateTemp2 = dateTemp1 / 60; //分钟
+        long dateTemp3 = dateTemp2 / 60; //小时
+        long dateTemp4 = dateTemp3 / 24; //天数
+        long dateTemp5 = dateTemp4 / 30; //月数
+        long dateTemp6 = dateTemp5 / 12; //年数
+        if (dateDiff < 0) {
+            if (dateTemp6 > 0) {
+                msg = dateTemp6 + "年后";
+            } else if (dateTemp5 > 0) {
+                msg = dateTemp5 + "个月后";
+            } else if (dateTemp4 > 0) {
+                msg = dateTemp4 + "天后";
+            } else if (dateTemp3 > 0) {
+                msg = dateTemp3 + "小时后";
+            } else if (dateTemp2 > 0) {
+                msg = dateTemp2 + "分钟后";
+            } else if (dateTemp1 > 0) {
+                msg = "刚刚";
+            }
+        } else {
+            if (dateTemp6 > 0) {
+                msg = dateTemp6 + "年前";
+            } else if (dateTemp5 > 0) {
+                msg = dateTemp5 + "个月前";
+            } else if (dateTemp4 > 0) {
+                msg = dateTemp4 + "天前";
+            } else if (dateTemp3 > 0) {
+                msg = dateTemp3 + "小时前";
+            } else if (dateTemp2 > 0) {
+                msg = dateTemp2 + "分钟前";
+            } else if (dateTemp1 > 0) {
+                msg = "刚刚";
+            }
+        }
+        return msg;
     }
-
 
     /**
-     * 按用户格式字符串距离今天的天数
-     *
-     * @param date   日期字符串
-     * @param format 日期格式
-     * @return 按用户格式字符串距离今天的天数
+     * @param date    在指定日期上增加/减少整（年 月 日 时 分 秒）数
+     * @param CalType 年-Calendar.YEAR
+     *                月-Calendar.MONTH
+     *                日-Calendar.DAY_OF_MONTH
+     *                时-Calendar.HOUR
+     *                分-Calendar.MINUTE
+     *                秒-Calendar.SECOND
+     * @param i       增(1)/减(-1)数量
+     * @return
      */
-    public static int countDays(String date, String format) {
-        long t = Calendar.getInstance().getTime().getTime();
-        Calendar c = Calendar.getInstance();
-        c.setTime(parse(date, format));
-        long t1 = c.getTime().getTime();
-        return (int) (t / 1000 - t1 / 1000) / 3600 / 24;
-
+    public static Date setDiffValueYMDHMS(Date date, int CalType, int i) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(CalType, i);
+        return cal.getTime();
     }
+
 }
