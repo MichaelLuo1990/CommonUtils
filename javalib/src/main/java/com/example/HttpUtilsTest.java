@@ -6,7 +6,7 @@ import com.utils.HttpUtils;
  * Desc http接口请求测试
  * Created by Michael on 2018/2/7.
  */
-public class HttpRequestTest {
+public class HttpUtilsTest {
 
     //天气开放API  Get请求测试
     public static String urlWeather = "http://www.sojson.com/open/api/weather/json.shtml";
