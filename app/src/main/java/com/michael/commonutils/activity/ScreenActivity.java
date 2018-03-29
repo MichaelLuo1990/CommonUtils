@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.michael.commonutils.R;
+import com.michael.commonutils.utils.DisplayConvertUtils;
 import com.michael.commonutils.utils.ScreenUtils;
 
 /**
@@ -96,10 +97,10 @@ public class ScreenActivity extends Activity {
      */
     public void transferDpPxSpClick(View view) {
         TextView tvTranfer = (TextView) findViewById(R.id.tv_screen_dp_px_sp_transform);
-        float px2dp = ScreenUtils.px2dp(this, 10);
-        float dp2px = ScreenUtils.dp2px(this, 10);
-        float sp2px = ScreenUtils.sp2px(this, 10);
-        float px2sp = ScreenUtils.px2sp(this, 10);
+        float px2dp = DisplayConvertUtils.px2dp(this, 10);
+        float dp2px = DisplayConvertUtils.dp2px(this, 10);
+        float sp2px = DisplayConvertUtils.sp2px(this, 10);
+        float px2sp = DisplayConvertUtils.px2sp(this, 10);
         tvTranfer.setText("10px--->" + px2dp + "dp" + "  /  " + "10dp--->" + dp2px + "px"  + "  /  " +
                 "10sp--->" + sp2px + "px" + "  /  " + "10px--->" + px2sp + "sp"  + "  /  " );
     }
@@ -110,7 +111,8 @@ public class ScreenActivity extends Activity {
      */
     public void showScreenShotStatusbarClick(View view) {
         final ImageView imageView = (ImageView) findViewById(R.id.iv_screen_shot_with_statusbar);
-        Bitmap bitmap = ScreenUtils.screenShotWithStatusBar(this);
+//        Bitmap bitmap = ScreenUtils.screenShotWithStatusBar(this);
+        Bitmap bitmap = ScreenUtils.screenShot(this, true);
         imageView.setImageBitmap(bitmap);
         if (imageView.getVisibility() == View.GONE) {
             scrollView.setVisibility(View.GONE);
@@ -131,7 +133,8 @@ public class ScreenActivity extends Activity {
      */
     public void showScreenShotWithoutStatusBarClick(View view) {
         final ImageView imageView = (ImageView) findViewById(R.id.iv_screen_shot_without_statusbar);
-        Bitmap bitmap = ScreenUtils.screenShotWithoutStatusBar(this);
+//        Bitmap bitmap = ScreenUtils.screenShotWithoutStatusBar(this);
+        Bitmap bitmap = ScreenUtils.screenShot(this, false);
         imageView.setImageBitmap(bitmap);
         if (imageView.getVisibility() == View.GONE) {
             scrollView.setVisibility(View.GONE);
@@ -144,6 +147,15 @@ public class ScreenActivity extends Activity {
                 imageView.setVisibility(View.GONE);
             }
         });
+    }
+
+    /**
+     * 当前屏幕是否锁屏状态
+     * @param view
+     */
+    public void isCreenLockedClick(View view) {
+        TextView textView = (TextView) findViewById(R.id.tv_screen_locked);
+        textView.setText("当前屏幕是否锁屏状态" + ScreenUtils.isScreenLock(this));
     }
 
 }
