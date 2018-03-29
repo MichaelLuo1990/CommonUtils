@@ -33,7 +33,7 @@ public class KeyboardActivity extends AppCompatActivity {
      */
     public void llParentClick(View view) {
         if (KeyboardUtils.isSoftInputShow(this)) {
-            KeyboardUtils.closeKeybord(editText, this);
+            KeyboardUtils.hideSoftInput(editText, this);
         }
     }
 
@@ -43,7 +43,8 @@ public class KeyboardActivity extends AppCompatActivity {
      * @param view
      */
     public void showKeyboardClick(View view) {
-        KeyboardUtils.openKeybord(editText, this);
+//        KeyboardUtils.showSoftInput(editText, this);
+        KeyboardUtils.showSoftInput(view);
     }
 
     /**
@@ -53,7 +54,8 @@ public class KeyboardActivity extends AppCompatActivity {
      */
     public void hideKeyboardClick(View view) {
         if (KeyboardUtils.isSoftInputShow(this)) {
-            KeyboardUtils.closeKeybord(editText, this);
+//            KeyboardUtils.closeKeybord(editText, this);
+            KeyboardUtils.hideSoftInput(view);
         }
     }
 }

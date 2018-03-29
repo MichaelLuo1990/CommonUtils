@@ -18,7 +18,7 @@ public class KeyboardUtils {
      * @param mEditText 输入框
      * @param mContext  上下文
      */
-    public static void openKeybord(EditText mEditText, Context mContext) {
+    public static void showSoftInput(EditText mEditText, Context mContext) {
         InputMethodManager imm = (InputMethodManager) mContext
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
@@ -27,16 +27,70 @@ public class KeyboardUtils {
     }
 
     /**
+     * Show the soft input.
+     *
+     * @param activity The activity.
+     */
+    public static void showSoftInput(final Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        View view = activity.getCurrentFocus();
+        if (view == null) view = new View(activity);
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+    /**
+     * Show the soft input.
+     *
+     * @param view The view.
+     */
+    public static void showSoftInput(final View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+
+    /**
      * 关闭软键盘
      *
      * @param mEditText 输入框
      * @param mContext  上下文
      */
-    public static void closeKeybord(EditText mEditText, Context mContext) {
+    public static void hideSoftInput(EditText mEditText, Context mContext) {
         InputMethodManager imm = (InputMethodManager) mContext
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
 
         imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+    }
+
+    /**
+     * Hide the soft input.
+     *
+     * @param activity The activity.
+     */
+    public static void hideSoftInput(final Activity activity) {
+        InputMethodManager imm =
+                (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        View view = activity.getCurrentFocus();
+        if (view == null) view = new View(activity);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
+     * Hide the soft input.
+     *
+     * @param view The view.
+     */
+    public static void hideSoftInput(final View view) {
+        InputMethodManager imm =
+                (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) return;
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     /**
