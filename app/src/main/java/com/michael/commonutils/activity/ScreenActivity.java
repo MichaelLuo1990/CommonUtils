@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.michael.commonutils.R;
 import com.michael.commonutils.utils.DisplayConvertUtils;
@@ -115,6 +116,7 @@ public class ScreenActivity extends Activity {
         Bitmap bitmap = ScreenUtils.screenShot(this, true);
         imageView.setImageBitmap(bitmap);
         if (imageView.getVisibility() == View.GONE) {
+            Toast.makeText(this, "显示截屏预览，点击屏幕返回", Toast.LENGTH_SHORT).show();
             scrollView.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
         }
@@ -137,6 +139,7 @@ public class ScreenActivity extends Activity {
         Bitmap bitmap = ScreenUtils.screenShot(this, false);
         imageView.setImageBitmap(bitmap);
         if (imageView.getVisibility() == View.GONE) {
+            Toast.makeText(this, "显示截屏预览，点击屏幕返回", Toast.LENGTH_SHORT).show();
             scrollView.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
         }

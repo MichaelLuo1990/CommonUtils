@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.michael.commonutils.activity.DeviceInfoActivity;
+import com.michael.commonutils.activity.ImageConvertActivity;
 import com.michael.commonutils.activity.KeyboardActivity;
 import com.michael.commonutils.activity.NetStatusActivity;
 import com.michael.commonutils.activity.PermissionActivity;
@@ -31,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 "DeviceInfoUtils-硬件设备信息操作/获取",
                 "StringUtils&RegexUtils-字符串&正则表达式判断",
                 "HttpUtils-http网络请求",
-                "DateTimeUtils-日期时间获取/装换"};
+                "DateTimeUtils-日期时间获取/装换",
+                "DisplayConvertUtils-屏幕分辨率单位dp\\px\\sp装换",
+                "ImageConvertUtils-图片格式类型转换"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, array);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 8:
                         Toast.makeText(MainActivity.this, "相关测试->javalib目录DateTimeUtilsTest", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 9:
+                        Toast.makeText(MainActivity.this, "相关测试->ScreenActivity", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(MainActivity.this, ScreenActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 10:
+                        intent = new Intent(MainActivity.this, ImageConvertActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;

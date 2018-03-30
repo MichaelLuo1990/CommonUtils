@@ -42,6 +42,9 @@
         <activity
             android:name=".activity.DeviceInfoActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ImageConvertActivity"
+            android:screenOrientation="portrait" />
         <!--<activity android:name=".Activity.StorageActivity"-->
         <!--android:screenOrientation="portrait" />-->
         <!--<activity android:name=".Activity.AssetsRawActivity"-->
