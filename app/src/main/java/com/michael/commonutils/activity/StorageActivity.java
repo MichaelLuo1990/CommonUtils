@@ -1,6 +1,7 @@
 package com.michael.commonutils.activity;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,4 +51,15 @@ public class StorageActivity extends AppCompatActivity {
         tvsdSize.setText("总容量：" + sdCardTotalSize + "M   /   " + "可用容量：" + sdCardAvailableSize + "M");
     }
 
+    /**
+     * 获取系统/SD卡存储相关路径信息
+     *
+     * @param view
+     */
+    public void getSysSDStorageDirClick(View view) {
+        TextView textView = (TextView) findViewById(R.id.tv_get_sys_storage_dir);
+        textView.setText("获取系统根目录" + StorageUtils.getRootDirectoryPath() + "/n" +
+                StorageUtils.getSDCardPublicDir(Environment.DIRECTORY_PICTURES)  + "/n" );
+
+    }
 }

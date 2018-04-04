@@ -28,4 +28,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="getSysSDStorageDirClick"
+        android:text="获取系统/SD卡存储路径（目录）" />
+
+    <TextView
+        android:id="@+id/tv_get_sys_storage_dir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" />
+
 </LinearLayout>

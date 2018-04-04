@@ -39,19 +39,8 @@ public class StorageUtils {
     }
 
     /**
-     * 获取SD卡的根目录
-     *
-     * @return
-     */
-    public static String getSDCardBaseDir() {
-        if (isSDCardMounted()) {
-            return Environment.getExternalStorageDirectory().getAbsolutePath();
-        }
-        return null;
-    }
-
-    /**
      * 获取SD卡的完整空间大小，返回MB
+     *
      * @return 单位 M
      */
     public static long getSDCardTotalSize() {
@@ -117,38 +106,6 @@ public class StorageUtils {
         return blockSize * availableBlocks / 1024 / 1024;
     }
 
-//    /*显示ROM的可用和总容量，ROM相当于电脑的C盘*/
-//    private void showROMInfo(){
-//        File file=Environment.getDataDirectory();
-//        StatFs statFs=new StatFs(file.getPath());
-//        long blockSize=statFs.getBlockSize();
-//        long totalBlocks=statFs.getBlockCount();
-//        long availableBlocks=statFs.getAvailableBlocks();
-//
-//        String[] total=fileSize(totalBlocks*blockSize);
-//        String[] available=fileSize(availableBlocks*blockSize);
-//
-//        rOMTextView.setText("ROM "+available[0]+available[1]+"/"+total[0]+total[1]);
-//    }
-//    /*显示SD卡的可用和总容量，SD卡就相当于电脑C盘以外的硬盘*/
-//    private void showSDInfo(){
-//        if(Environment.getExternalStorageState().equals
-//                (Environment.MEDIA_MOUNTED)){
-//            File file=Environment.getExternalStorageDirectory();
-//            StatFs statFs=new StatFs(file.getPath());
-//            long blockSize=statFs.getBlockSize();
-//            long totalBlocks=statFs.getBlockCount();
-//            long availableBlocks=statFs.getAvailableBlocks();
-//
-//            String[] total=fileSize(totalBlocks*blockSize);
-//            String[] available=fileSize(availableBlocks*blockSize);
-//
-//            sDTextView.setText("SD "+available[0]+available[1]+"/"+total[0]+total[1]);
-//        }else {
-//            sDTextView.setText("SD CARD 已删除");
-//        }
-//    }
-
     /**
      * 获取指定路径所在空间的剩余可用容量字节数，单位byte
      *
@@ -164,6 +121,19 @@ public class StorageUtils {
         StatFs stat = new StatFs(filePath);
         long availableBlocks = (long) stat.getAvailableBlocks() - 4;
         return stat.getBlockSize() * availableBlocks;
+    }
+
+    //===================================================获取路径（目录）====================================================
+    /**
+     * 获取SD卡的根目录
+     *
+     * @return
+     */
+    public static String getSDCardBaseDir() {
+        if (isSDCardMounted()) {
+            return Environment.getExternalStorageDirectory().getAbsolutePath();
+        }
+        return null;
     }
 
     /**
@@ -190,6 +160,9 @@ public class StorageUtils {
         return context.getExternalFilesDir(type).getAbsolutePath();
     }
 
+    //===================================================获取路径（目录）====================================================
+
+    //===================================================写入相关操作====================================================
     // 往SD卡的公有目录下保存文件
     public static boolean saveFileToSDCardPublicDir(byte[] data, String type,
                                                     String fileName) {
@@ -332,7 +305,9 @@ public class StorageUtils {
             return false;
         }
     }
+    //===================================================写入相关操作====================================================
 
+    //===================================================获取文件相关操作====================================================
     // 从SD卡获取文件
     public static byte[] loadFileFromSDCard(String fileDir) {
         BufferedInputStream bis = null;
@@ -373,12 +348,21 @@ public class StorageUtils {
         return null;
     }
 
+    /**
+     * 文件是否存在
+     * @param filePath
+     * @return
+     */
     public static boolean isFileExist(String filePath) {
         File file = new File(filePath);
         return file.isFile();
     }
 
-    // 从sdcard中删除文件
+    /**
+     * 从sdcard中删除文件
+     * @param filePath
+     * @return
+     */
     public static boolean removeFileFromSDCard(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {

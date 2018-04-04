@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.SharedPreferenceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
@@ -45,6 +45,8 @@
         <activity
             android:name=".activity.ImageConvertActivity"
             android:screenOrientation="portrait" />
+        <!--<activity android:name=".activity.SharedPreferenceActivity"-->
+            <!--android:screenOrientation="portrait"/>-->
         <!--<activity android:name=".Activity.StorageActivity"-->
         <!--android:screenOrientation="portrait" />-->
         <!--<activity android:name=".Activity.AssetsRawActivity"-->
