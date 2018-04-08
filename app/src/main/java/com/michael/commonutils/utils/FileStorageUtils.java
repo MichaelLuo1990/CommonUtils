@@ -16,13 +16,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Desc 存储处理（rom内存存储 || SD卡外部存储）
+ * Desc 存储处理（rom内部存储 || SD卡外部存储）
  * Created by Michael on 2018/2/6.
  */
 
-public class StorageUtils {
+public class FileStorageUtils {
 
-    private StorageUtils() {
+    private FileStorageUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
@@ -107,7 +107,7 @@ public class StorageUtils {
     }
 
     /**
-     * 获取指定路径所在空间的剩余可用容量字节数，单位byte
+     * 获取指定路径所在空间的剩余可用容量字节数，单位M
      *
      * @param filePath
      * @return 容量字节 SDCard可用空间，内部存储可用空间
@@ -120,10 +120,11 @@ public class StorageUtils {
         }
         StatFs stat = new StatFs(filePath);
         long availableBlocks = (long) stat.getAvailableBlocks() - 4;
-        return stat.getBlockSize() * availableBlocks;
+        return stat.getBlockSize() * availableBlocks / 1024 / 1024;
     }
 
     //===================================================获取路径（目录）====================================================
+
     /**
      * 获取SD卡的根目录
      *
@@ -145,17 +146,33 @@ public class StorageUtils {
         return Environment.getRootDirectory().getAbsolutePath();
     }
 
-    // 获取SD卡公有目录的路径
+    /**
+     * 获取SD卡公有目录的路径
+     *
+     * @param type 文件类型
+     * @return
+     */
     public static String getSDCardPublicDir(String type) {
         return Environment.getExternalStoragePublicDirectory(type).toString();
     }
 
-    // 获取SD卡私有Cache目录的路径
+    /**
+     * 获取SD卡私有Cache目录的路径
+     *
+     * @param context
+     * @return
+     */
     public static String getSDCardPrivateCacheDir(Context context) {
         return context.getExternalCacheDir().getAbsolutePath();
     }
 
-    // 获取SD卡私有Files目录的路径
+    /**
+     * 获取SD卡私有Files目录的路径
+     *
+     * @param context
+     * @param type    文件类型
+     * @return
+     */
     public static String getSDCardPrivateFilesDir(Context context, String type) {
         return context.getExternalFilesDir(type).getAbsolutePath();
     }
@@ -163,7 +180,15 @@ public class StorageUtils {
     //===================================================获取路径（目录）====================================================
 
     //===================================================写入相关操作====================================================
-    // 往SD卡的公有目录下保存文件
+
+    /**
+     * 往SD卡的公有目录下保存文件
+     *
+     * @param data
+     * @param type
+     * @param fileName
+     * @return
+     */
     public static boolean saveFileToSDCardPublicDir(byte[] data, String type,
                                                     String fileName) {
         BufferedOutputStream bos = null;
@@ -181,7 +206,6 @@ public class StorageUtils {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -189,7 +213,14 @@ public class StorageUtils {
         return false;
     }
 
-    // 往SD卡的自定义目录下保存文件
+    /**
+     * 往SD卡根目录下自定义文件（名/夹）保存文件
+     *
+     * @param data
+     * @param dir
+     * @param fileName
+     * @return
+     */
     public static boolean saveFileToSDCardCustomDir(byte[] data, String dir,
                                                     String fileName) {
         BufferedOutputStream bos = null;
@@ -210,7 +241,6 @@ public class StorageUtils {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -218,7 +248,15 @@ public class StorageUtils {
         return false;
     }
 
-    // 往SD卡的私有Files目录下保存文件
+    /**
+     * 往SD卡的私有Files目录下保存文件
+     *
+     * @param data
+     * @param type
+     * @param fileName
+     * @param context
+     * @return
+     */
     public static boolean saveFileToSDCardPrivateFilesDir(byte[] data,
                                                           String type, String fileName, Context context) {
         BufferedOutputStream bos = null;
@@ -236,7 +274,6 @@ public class StorageUtils {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -244,7 +281,14 @@ public class StorageUtils {
         return false;
     }
 
-    // 往SD卡的私有Cache目录下保存文件
+    /**
+     * 往SD卡的私有Cache目录下保存文件
+     *
+     * @param data
+     * @param fileName
+     * @param context
+     * @return
+     */
     public static boolean saveFileToSDCardPrivateCacheDir(byte[] data,
                                                           String fileName, Context context) {
         BufferedOutputStream bos = null;
@@ -262,7 +306,6 @@ public class StorageUtils {
                 try {
                     bos.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -270,14 +313,20 @@ public class StorageUtils {
         return false;
     }
 
-    // 保存bitmap图片到SDCard的私有Cache目录
+    /**
+     * 保存bitmap图片到SDCard的私有Cache目录
+     *
+     * @param bitmap
+     * @param fileName
+     * @param context
+     * @return
+     */
     public static boolean saveBitmapToSDCardPrivateCacheDir(Bitmap bitmap,
                                                             String fileName, Context context) {
         if (isSDCardMounted()) {
             BufferedOutputStream bos = null;
             // 获取私有的Cache缓存目录
             File file = context.getExternalCacheDir();
-
             try {
                 bos = new BufferedOutputStream(new FileOutputStream(new File(
                         file, fileName)));
@@ -308,14 +357,17 @@ public class StorageUtils {
     //===================================================写入相关操作====================================================
 
     //===================================================获取文件相关操作====================================================
-    // 从SD卡获取文件
-    public static byte[] loadFileFromSDCard(String fileDir) {
+    /**
+     * 从SD卡获取文件
+     * @param filePath
+     * @return byte[]
+     */
+    public static byte[] loadFileFromSDCard(String filePath) {
         BufferedInputStream bis = null;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
         try {
             bis = new BufferedInputStream(
-                    new FileInputStream(new File(fileDir)));
+                    new FileInputStream(new File(filePath)));
             byte[] buffer = new byte[8 * 1024];
             int c = 0;
             while ((c = bis.read(buffer)) != -1) {
@@ -336,8 +388,12 @@ public class StorageUtils {
         return null;
     }
 
-    // 从SDCard中寻找指定目录下的文件，返回Bitmap
-    public Bitmap loadBitmapFromSDCard(String filePath) {
+    /**
+     * 从SDCard中寻找指定目录下的文件，返回Bitmap
+     * @param filePath
+     * @return
+     */
+    public static Bitmap loadBitmapFromSDCard(String filePath) {
         byte[] data = loadFileFromSDCard(filePath);
         if (data != null) {
             Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
@@ -350,6 +406,7 @@ public class StorageUtils {
 
     /**
      * 文件是否存在
+     *
      * @param filePath
      * @return
      */
@@ -360,6 +417,7 @@ public class StorageUtils {
 
     /**
      * 从sdcard中删除文件
+     *
      * @param filePath
      * @return
      */

@@ -1,17 +1,13 @@
 package com.michael.commonutils.activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.TextView;
 
 import com.michael.commonutils.R;
 import com.michael.commonutils.utils.DeviceInfoUtils;
-import com.michael.commonutils.utils.StorageUtils;
 
 /**
  * Desc 设备操作系统信息测试

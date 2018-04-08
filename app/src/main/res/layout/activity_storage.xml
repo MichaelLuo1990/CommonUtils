@@ -4,40 +4,171 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="romSizeClick"
-        android:text="获取rom本机存储容量（单位：M）" />
-
     <TextView
-        android:id="@+id/tv_rom_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="file storage reference"
+        android:textSize="20sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="sdSizeClick"
-        android:text="获取SD卡存储容量（单位：M）" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eee"/>
 
-    <TextView
-        android:id="@+id/tv_sd_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="getSysSDStorageDirClick"
-        android:text="获取系统/SD卡存储路径（目录）" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_get_sys_storage_dir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="romSizeClick"
+                android:text="获取rom本机存储容量（单位：M）" />
+
+            <TextView
+                android:id="@+id/tv_rom_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sdSizeClick"
+                android:text="获取SD卡存储容量（单位：M）" />
+
+            <TextView
+                android:id="@+id/tv_sd_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sdTargetSizeClick"
+                android:text="获取指定SD卡路径存储容量（单位：byte）" />
+
+            <TextView
+                android:id="@+id/tv_sd_target_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getSysSDStorageDirClick"
+                android:text="获取系统/SD卡/cache/file文件存储路径（目录）" />
+
+            <TextView
+                android:id="@+id/tv_get_sys_storage_dir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveFileToSDCardClick"
+                android:text="往SD卡的公有目录下保存文件" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="存储目录：/storage/sdcard0/Pictures" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveFileToSDCardDirClick"
+                android:text="往SD卡根目录下自定义文件（名/夹）保存文件" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="存储自定义目录：getSDCardBaseDir() + File.separator + dir \n即：根目录+自定义目录路径，Lenovo K30-T测试存储目录：/storage/sdcard0" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="savePriFilesCacheDirClick"
+                android:text="往SD卡的私有Files与Cache目录下保存文件" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="目录位置：/storage/sdcard0/当前包名/... \n私有Files目录：/storage/sdcard0/com.michael.commonutils/files/Pictures/   \n私有Cache目录：/storage/sdcard0/com.michael.commonutils/cache" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveBitmapToCacheDirClick"
+                android:text="保存bitmap图片到SDCard的私有Cache目录" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="私有Cache目录：/storage/sdcard0/com.michael.commonutils/cache" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="loadByteBitmapClick"
+                android:text="从SD卡获取文件" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="获取byte[]类型格式" />
+
+            <ImageView
+                android:id="@+id/iv_load_byte_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="获取bitmap类型格式" />
+
+            <ImageView
+                android:id="@+id/iv_load_bitmap_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="isFileExistClick"
+                android:text="文件删除操作" />
+
+            <TextView
+                android:id="@+id/tv_file_exist_del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_load_is_exist_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
