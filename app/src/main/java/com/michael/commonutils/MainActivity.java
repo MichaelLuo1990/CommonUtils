@@ -15,6 +15,7 @@ import com.michael.commonutils.activity.KeyboardActivity;
 import com.michael.commonutils.activity.NetStatusActivity;
 import com.michael.commonutils.activity.PermissionActivity;
 import com.michael.commonutils.activity.ScreenActivity;
+import com.michael.commonutils.activity.SharedPreferenceActivity;
 import com.michael.commonutils.activity.ToastActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 "HttpUtils-http网络请求",
                 "DateTimeUtils-日期时间获取/装换",
                 "DisplayConvertUtils-屏幕分辨率单位dp\\px\\sp装换",
-                "ImageConvertUtils-图片格式类型转换"};
+                "ImageConvertUtils-图片格式类型转换",
+                "SharedPreferenceUtils-SP存储操作"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, array);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 10:
                         intent = new Intent(MainActivity.this, ImageConvertActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 11:
+                        intent = new Intent(MainActivity.this, SharedPreferenceActivity.class);
                         startActivity(intent);
                         break;
                     default:
