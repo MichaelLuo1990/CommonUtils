@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 "ScreenUtils-屏幕状态获取",
                 "NetStatusUtils-网络状态判断获取",
                 "DeviceInfoUtils-硬件设备信息操作/获取",
-                "StringUtils&RegexUtils-字符串&正则表达式判断",
-                "HttpUtils-http网络请求",
-                "DateTimeUtils-日期时间获取/装换",
+                "StringUtils&RegexUtils-字符串&正则表达式判断from javaModule",
+                "HttpUrlConnectionUtils-http网络请求from javaModule",
+                "DateTimeUtils-日期时间获取/装换from javaModule",
                 "DisplayConvertUtils-屏幕分辨率单位dp\\px\\sp装换",
                 "ImageConvertUtils-图片格式类型转换",
                 "SharedPreferenceUtils-SP存储操作",
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 6:
-                        Toast.makeText(MainActivity.this, "相关测试->javalib目录RegexUtilsTest&StringUtilsTest", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "相关测试->javaModule->RegexUtilsTest&StringUtilsTest", Toast.LENGTH_SHORT).show();
                         break;
                     case 7:
-                        Toast.makeText(MainActivity.this, "相关测试->javalib目录HttpUtilsTest", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "相关测试->javaModule->HttpUrlConnectionUtils", Toast.LENGTH_SHORT).show();
                         break;
                     case 8:
-                        Toast.makeText(MainActivity.this, "相关测试->javalib目录DateTimeUtilsTest", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "相关测试->javaModule->DateTimeUtilsTest", Toast.LENGTH_SHORT).show();
                         break;
                     case 9:
                         Toast.makeText(MainActivity.this, "相关测试->ScreenActivity", Toast.LENGTH_SHORT).show();
