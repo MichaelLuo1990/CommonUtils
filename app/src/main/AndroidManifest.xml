@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.CryptionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
@@ -54,6 +54,9 @@
         <activity
             android:name=".activity.FileStorageActivity"
             android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".activity.CryptionActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <!--<activity android:name=".activity.AssetsRawActivity"-->
         <!--android:screenOrientation="portrait" />-->
     </application>

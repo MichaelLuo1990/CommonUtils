@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.michael.commonutils.activity.CryptionActivity;
 import com.michael.commonutils.activity.DeviceInfoActivity;
 import com.michael.commonutils.activity.FileStorageActivity;
 import com.michael.commonutils.activity.ImageConvertActivity;
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 "DisplayConvertUtils-屏幕分辨率单位dp\\px\\sp装换",
                 "ImageConvertUtils-图片格式类型转换",
                 "SharedPreferenceUtils-SP存储操作",
-                "FileStorageUtils-文件内部、SD卡存储操作"};
+                "FileStorageUtils-文件内部、SD卡存储操作",
+                "MD5Util/AESUtils/DESUtils/RSAUtils-数据加密/解密处理"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, array);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "相关测试->javaModule->DateTimeUtilsTest", Toast.LENGTH_SHORT).show();
                         break;
                     case 9:
-                        Toast.makeText(MainActivity.this, "相关测试->ScreenActivity", Toast.LENGTH_SHORT).show();
                         intent = new Intent(MainActivity.this, ScreenActivity.class);
                         startActivity(intent);
                         break;
@@ -94,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 12:
                         intent = new Intent(MainActivity.this, FileStorageActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 13:
+                        intent = new Intent(MainActivity.this, CryptionActivity.class);
                         startActivity(intent);
                         break;
                     default:
